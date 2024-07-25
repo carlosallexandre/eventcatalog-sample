@@ -1,10 +1,10 @@
 name: Build and Deploy
 
-on: 
+on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-  
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -23,11 +23,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-      
-      - name: Build 🔧 
+
+      - name: Build 🔧
         run: |
           npm install
           npm run build
+
+      - name: Config Jekyll
+        run: cp _config.yml ./dist/_config.yml
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
